@@ -39,7 +39,11 @@ app.use(cookieSession({
 }));
 
 
+
+//chemin statique indiqua a express qu'il faut gérer le ressources images de manière statique à chaque fois qu'elle reçoit une requête
+// vers la route \images.
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 

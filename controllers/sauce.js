@@ -4,12 +4,13 @@ const fs = require('fs'); //module fournit de nombreuses fonctionnalités très 
 
 //Creer une sauce.
 exports.createSauce = (req, res, next) => {
-    const sauceObject = JSON.parse(req.body.sauce);
-    delete sauceObject._id;
+    //Pour ajouter un fichier à la requête, le front-end doit envoyer les données de la requête sous la forme form-data, et non sous forme de JSON.
+    const sauceObject = JSON.parse(req.body.sauce);// analyse de l'objet pour obtenir un objet utilisable.
+    delete sauceObject._id;// suppression de l'id de la sauce.
     const sauce = new Sauce({
        ...sauceObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    });
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,// req.protocol(http); req.get('host')=localhost:3000; req.file.filename=nom du fichier.
+    });// ceci envoie une requête get vers http://localhost:3000/images/<image-name>.jpg, le chemin statique va répondre a cette requête.
 
     console.log(sauce);
 

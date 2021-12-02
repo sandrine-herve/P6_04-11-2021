@@ -1,12 +1,11 @@
-const MaskData = require('./maskdata');
-
-const maskPassword = {
-	maskWith: "*",
-	maxMaskedCharacters: 100,
-	unmaskedStartCharacters: 0,
-	unmaskedEndCharacters : 0
+const MaskData = require('maskdata');
+const mongoose = require('mongoose');
+const emailMask2Options = {
+    maskWith: "*", 
+    unmaskedStartCharactersBeforeAt: 3,
+    unmaskedEndCharactersAfterAt: 2,
+    maskAtTheRate: false
 };
+const email = require('./models/user');
 
-const password = require('./middleware/password');
-
-const maskedPassword = MaskData.maskPassword(password);
+module.exports = MaskData(email, emailMask2Options);
